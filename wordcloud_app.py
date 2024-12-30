@@ -1,7 +1,12 @@
+# 系统库导入
 import sys
 import subprocess
 import pkg_resources
+import re
+import string
+from collections import Counter
 
+# 依赖检查函数
 def check_and_install_dependencies():
     """检查并安装所需的依赖包"""
     required_packages = {
@@ -34,20 +39,20 @@ def check_and_install_dependencies():
             print(f"pip install {package}=={version}")
         sys.exit(1)
 
-# 在导入其他模块之前检查依赖
+# 检查并安装依赖
 if __name__ == "__main__":
     check_and_install_dependencies()
 
+# GUI库导入
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
+
+# 第三方库导入
 from PIL import Image, ImageTk
 import jieba
 from wordcloud import WordCloud
-import io
-from collections import Counter
-import string
-import re
 
+# 主应用类
 class WordCloudApp:
     def __init__(self, root):
         self.root = root
