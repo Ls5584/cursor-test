@@ -130,6 +130,9 @@ class WordCloudApp:
         self.save_btn = ttk.Button(button_frame, text="保存图片", command=self.save_image)
         self.save_btn.grid(row=0, column=2, padx=5)
         
+        self.reset_btn = ttk.Button(button_frame, text="初始化", command=self.reset_app)
+        self.reset_btn.grid(row=0, column=3, padx=5)
+        
         # 词频统计显示区域
         freq_display_frame = ttk.LabelFrame(self.left_v_paned, text="词频统计", padding="5")
         
@@ -369,6 +372,33 @@ class WordCloudApp:
                 messagebox.showinfo("成功", "词云图片已保存")
             except Exception as e:
                 messagebox.showerror("错误", f"保存失败：{str(e)}")
+    
+    def reset_app(self):
+        """初始化应用状态"""
+        # 清空文本输入
+        self.text_input.delete('1.0', tk.END)
+        
+        # 清空词频显示
+        self.freq_display.config(state=tk.NORMAL)
+        self.freq_display.delete('1.0', tk.END)
+        self.freq_display.config(state=tk.DISABLED)
+        
+        # 清空词云图像
+        self.image_label.configure(image='')
+        self.current_wordcloud = None
+        
+        # 清空自定义停用词
+        self.custom_stopwords.clear()
+        self.stopwords_listbox.delete(0, tk.END)
+        self.stopword_var.set("")
+        
+        # 隐藏停用词区域
+        self.stopwords_frame.grid_remove()
+        
+        # 重置变量
+        self.word_frequencies = None
+        
+        messagebox.showinfo("提示", "已重置所有内容")
 
 if __name__ == "__main__":
     try:

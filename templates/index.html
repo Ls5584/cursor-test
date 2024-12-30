@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>词云统计应用</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部导航栏 -->
+        <nav class="navbar">
+            <div class="nav-brand">词云统计应用</div>
+            <div class="nav-links">
+                <button id="helpBtn" class="nav-btn">
+                    <span class="material-icons">help_outline</span>
+                    帮助
+                </button>
+                <button id="themeBtn" class="nav-btn">
+                    <span class="material-icons">dark_mode</span>
+                    切换主题
+                </button>
+            </div>
+        </nav>
+
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <!-- 左侧面板 -->
+            <div class="left-panel">
+                <!-- 文本输入区域 -->
+                <div class="input-section card">
+                    <h2><span class="material-icons">edit</span> 文本输入</h2>
+                    <div class="input-area">
+                        <textarea id="textInput" placeholder="请输入或粘贴要分析的文本..."></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button id="importBtn" class="btn primary">
+                            <span class="material-icons">upload_file</span>
+                            导入文件
+                        </button>
+                        <button id="generateBtn" class="btn success">
+                            <span class="material-icons">auto_awesome</span>
+                            生成词云
+                        </button>
+                        <button id="resetBtn" class="btn warning">
+                            <span class="material-icons">refresh</span>
+                            初始化
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 词频统计区域 -->
+                <div class="freq-section card">
+                    <h2><span class="material-icons">bar_chart</span> 词频统计</h2>
+                    <div class="freq-list" id="freqList">
+                        <!-- 词频统计结果将在这里动态显示 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧面板 -->
+            <div class="right-panel">
+                <!-- 词云显示区域 -->
+                <div class="wordcloud-section card">
+                    <h2><span class="material-icons">cloud</span> 词云图像</h2>
+                    <div class="wordcloud-display">
+                        <img id="wordcloudImage" src="" alt="词云图像将在这里显示">
+                    </div>
+                    <button id="saveBtn" class="btn primary" disabled>
+                        <span class="material-icons">save</span>
+                        保存图片
+                    </button>
+                </div>
+
+                <!-- 停用词管理区域 -->
+                <div class="stopwords-section card" id="stopwordsSection" style="display: none;">
+                    <h2><span class="material-icons">block</span> 自定义停用词</h2>
+                    <div class="stopwords-input">
+                        <input type="text" id="stopwordInput" placeholder="输入要过滤的词语...">
+                        <button id="addStopwordBtn" class="btn secondary">
+                            <span class="material-icons">add</span>
+                            添加
+                        </button>
+                    </div>
+                    <div class="stopwords-list" id="stopwordsList">
+                        <!-- 停用词列表将在这里动态显示 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 帮助对话框 -->
+    <div id="helpDialog" class="dialog">
+        <div class="dialog-content">
+            <h2>使用帮助</h2>
+            <div class="help-text">
+                <p><strong>基本操作：</strong></p>
+                <ul>
+                    <li>在文本输入框中输入或粘贴要分析的文本</li>
+                    <li>点击"导入文件"可以导入TXT文本文件</li>
+                    <li>点击"生成词云"开始分析并生成词云图像</li>
+                    <li>点击"初始化"可以清空所有内容重新开始</li>
+                </ul>
+                <p><strong>停用词管理：</strong></p>
+                <ul>
+                    <li>生成词云后可以添加自定义停用词</li>
+                    <li>添加的停用词将在下次生成词云时被过滤</li>
+                    <li>点击停用词右侧的删除按钮可以移除该停用词</li>
+                </ul>
+            </div>
+            <button id="closeHelpBtn" class="btn secondary">关闭</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 
